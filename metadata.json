@@ -1,0 +1,6 @@
+{
+  "name": "Ship Battle",
+  "description": "Command the U.S.S. Enterprise in a space battle against the Borg invasion.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

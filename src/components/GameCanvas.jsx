@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useEffect, useImperativeHandle, forwardRef } from 'react';
 
 // Asset Imports
 import starfieldSrc from '../assets/starfield.jpg';
@@ -113,8 +113,6 @@ const GameCanvas = forwardRef((props, ref) => {
         const count = 15;
         const enemies = [];
         const cols = 5;
-        const spacing = 100;
-        const startY = -count * 100; // Start way above
 
         for (let i = 0; i < count; i++) {
             enemies.push({
@@ -202,10 +200,9 @@ const GameCanvas = forwardRef((props, ref) => {
         let animationFrameId;
 
         const loop = (timestamp) => {
-            const dt = timestamp - gameState.current.lastTime;
             gameState.current.lastTime = timestamp;
 
-            update(dt);
+            update();
             draw();
 
             if (isPlaying) {
@@ -228,7 +225,7 @@ const GameCanvas = forwardRef((props, ref) => {
     }, [isPlaying, wave]);
 
     // Update Logic
-    const update = (dt) => {
+    const update = () => {
         const state = gameState.current;
         const width = state.width;
         const height = state.height;
