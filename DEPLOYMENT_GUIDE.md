@@ -1,39 +1,37 @@
 # How to Publish "Ship Battle" to GitHub Pages
 
-Since I have optimized the game to run as a **Single File**, publishing it is incredibly easy. You have two options:
+The game is hosted at `https://fab4arsnl2008.github.io/ship-battle/`.
 
-## Option 1: The Easiest Way (Just the Game)
-Use this if you just want to share the game and don't care about hosting the source code for other developers to see.
+---
 
-1.  **Locate the File**: Go to the `dist` folder inside your project. You will see an `index.html` file (filesize approx 1MB). **This file is the entire game.**
-2.  **Create a Repository**: Go to GitHub.com and create a new repository (e.g., `ship-battle`).
-3.  **Upload**: Click "Add file" -> "Upload files", and drag ONLY that `dist/index.html` file into the upload box. Commit changes.
-4.  **Activate Pages**:
-    *   Go to **Settings** -> **Pages**.
-    *   Under **Source**, select `Deploy from a branch`.
-    *   Under **Branch**, select `main` (or `master`) and folder `/ (root)`.
-    *   Click **Save**.
-5.  **Play**: Wait about 60 seconds. Your game will be live at `https://<your-username>.github.io/ship-battle/`.
+## Method 1: The Automated Way with GitHub Actions (Recommended)
 
-## Option 2: The "Developer" Way (Source Code)
-Use this if you want to back up your code and allow others to see how it was built.
+A workflow file ([.github/workflows/deploy.yml](file:///.github/workflows/deploy.yml)) is set up to automatically build and publish the game every time you push code to GitHub.
 
-1.  **Create Repository**: Create a new empty repository on GitHub.
-2.  **Push Code**: Run these commands in your project terminal:
-    ```bash
-    git init
-    git add .
-    git commit -m "Initial commit"
-    git branch -M main
-    git remote add origin https://github.com/<your-username>/<repo-name>.git
-    git push -u origin main
-    ```
-    *(Note: Replace the URL with your actual repository URL)*
-3.  **Configure Pages**:
-    *   Go to **Settings** -> **Pages**.
-    *   Select `Deploy from a branch`.
-    *   Select `main` branch and `/ (root)` folder.
-    *   **Important**: Because we have the `dist` folder ignored by default (standard practice), you need to change your build process or, simpler for now, remove `dist` from `.gitignore` before the steps above if you want to deploy the `dist` folder directly from the root. 
-    *   **Better Alternative for Option 2**: Since this is a React app, usually you set up a GitHub Action to build it.
-    
-    **Recommendation for you**: Stick to **Option 1** for now as it is foolproof with the Single-File build I created for you.
+### 1. Enable GitHub Actions for Pages in GitHub Settings
+1. Go to your repository on GitHub: **https://github.com/fab4arsnl2008/ship-battle**
+2. Click **Settings** (tab at the top).
+3. In the left sidebar, click **Pages**.
+4. Under **Build and deployment > Source**, click the dropdown and select:
+   **GitHub Actions** (instead of "Deploy from a branch").
+
+### 2. Commit and Push
+Run the following in your terminal:
+```bash
+git add .
+git commit -m "Configure GitHub Actions deployment for GitHub Pages"
+git push origin main
+```
+
+GitHub Actions will automatically run the build and publish the site. In about 60–90 seconds, your game will be live at:
+👉 **https://fab4arsnl2008.github.io/ship-battle/**
+
+---
+
+## Method 2: Manual Single-File Upload
+
+If you prefer deploying without GitHub Actions:
+1. Run `npm run build` in your project to produce `dist/index.html`.
+2. The `dist/index.html` file (~1 MB) contains the complete game with all graphics, sounds, and code bundled together.
+3. In GitHub repository **Settings > Pages**, select **Source: Deploy from a branch**, Branch: `main`, folder: `/ (root)`.
+4. Upload or copy `dist/index.html` to the repository root and commit it.
