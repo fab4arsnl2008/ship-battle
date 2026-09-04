@@ -2,7 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="./Starship.png" />
+    <script>
+      // Automatically redirect to dist/index.html on static hosts (e.g. GitHub Pages)
+      if (
+        window.location.hostname !== 'localhost' &&
+        window.location.hostname !== '127.0.0.1' &&
+        !window.location.pathname.includes('/dist/')
+      ) {
+        window.location.replace('./dist/index.html' + window.location.search + window.location.hash);
+      }
+    </script>
+    <link rel="icon" type="image/png" href="./Starship-Ct4LjWJN.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ship Battle</title>
     <meta name="description" content="Command the U.S.S. Enterprise in a space battle against the Borg invasion." />
